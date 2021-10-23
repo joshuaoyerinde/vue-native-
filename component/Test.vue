@@ -1,7 +1,10 @@
 <template>
     <view class="con">
         <text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum neque non quaerat omnis minus. Cupiditate, deleniti labore esse nulla suscipit numquam expedita porro, quasi aspernatur ipsum corporis iusto error hic!
+            <image
+            :style="{width: 300, height: 300,borderRadius:100}"
+            :source="{uri: navigation.getParam('imagesrc')}"
+          />
         </text>
     </view>
 </template>
@@ -9,7 +12,12 @@
 export default {
     data:()=>({
 
-    })
+    }),
+    props: {
+    navigation: {
+      type: Object
+    }
+  },
 }
 </script>
 <style scoped src="./assets/style.css">

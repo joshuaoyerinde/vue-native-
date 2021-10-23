@@ -10,7 +10,7 @@
           :style="{width: 60, height: 60,borderRadius:100}"
           :source="{uri: user.avatar_url}"
           />
-          <text class="text-title">{{ user.login }}</text>
+          <!-- <text class="text-title">{{ user.title }}</text> -->
           <text class="text-title">{{ user.contributions }}<text>contributions</text></text>
         </touchable-opacity>
       <!-- <TestUser/> -->
@@ -36,11 +36,22 @@ export default {
     users:[]
 
   }), 
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
   async created() {
-    const url = 'https://api.github.com/repos/GeekyAnts/vue-native-core/contributors'
+    // const url = 'https://api.github.com/repos/GeekyAnts/vue-native-core/contributors'
+    const url = "https://jsonplaceholder.typicode.com/photos";
     this.users = await fetch(url).then(res => res.json())
     // console.log(this.users);
   },
+  // async mounted(){
+  //   const url = "https://jsonplaceholder.typicode.com/photos";
+  //    this.users = await fetch(url).then(res => res.json())
+     
+  // },
   methods:{
     onClickButton(){
       this.count = this.count + 1;
@@ -55,9 +66,10 @@ export default {
         console.log('welcome');
       }
     },
-    handleClick(value){
-      console.log(value);
-      alert("joshua");
+    handleClick(user){
+      console.log(user.data);
+      this.navigation.navigate("Test",{imagesrc:user.data.thumbnail});
+      // alert("joshua");
     }
   },
 }
@@ -73,7 +85,7 @@ export default {
     /* margin-top: 33px; */
   }
   .header{
-    margin-top: 40px;
+    /* margin-top: 40px; */
     font-size: 30px;
     color:#F9682F;
     font-weight: 700;
@@ -96,8 +108,10 @@ export default {
   }
   .text-title{
     left:4px;
-    font-size:20px;
-     text-align: center;
+    font-size:12px;
+    width: 100%;
+    overflow: scroll;
+     /* text-align: center; */
   }
   image{
     border-radius: 100px;
